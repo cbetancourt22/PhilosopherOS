@@ -32,7 +32,13 @@ pthread_attr_t attribute[NUM_PHILOSOPHERS];
 
 int main(void)
 {
-    printf("HOla bisheshh");
+    int num = 1%5;
+    int num2 = 2%5;
+    int num3 = 3%5;
+    int num4 = 4%5;
+    int num5 = 5%5;
+
+    printf("Result %d", num5);
     
     return 0;
 }
@@ -45,6 +51,14 @@ void think(int philosopherIndex)
     sleep(thinkingTime);  // sleep for random time, philosopher is thinking 
 }
 
+void pickUpChop(int philosopherIndex)
+{
+    // Index of philosopher is the same as the index of chopstick to the left. Index of philosopher + 1 is the same as the index of
+    // chopstick to the right.
+    // Example, philosopher[0] has left chopstick 0 and right chopstick 1
+    int rightChop = (philosopherIndex + 1) % NUM_PHILOSOPHERS; 
+    int leftChop = (philosopherIndex + NUM_PHILOSOPHERS) % NUM_PHILOSOPHERS;
+}
 
 void eat(int philosopherIndex)
 {
