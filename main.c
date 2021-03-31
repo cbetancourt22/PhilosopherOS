@@ -18,6 +18,10 @@
 void think(int);
 
 void pickUpChop(int);
+
+/*
+    Unlock each mutex for left or right-hand chopstick that a philosopher grabbed
+*/
 void putDownChop(int);
 
 /*
@@ -58,6 +62,8 @@ void pickUpChop(int philosopherIndex)
     // Example, philosopher[0] has left chopstick 0 and right chopstick 1
     int rightChop = (philosopherIndex + 1) % NUM_PHILOSOPHERS; 
     int leftChop = (philosopherIndex + NUM_PHILOSOPHERS) % NUM_PHILOSOPHERS;
+
+
 }
 
 void eat(int philosopherIndex)
@@ -65,6 +71,14 @@ void eat(int philosopherIndex)
     int eatTime = rand() % 3 + 1; // philosopher thinks 1 - 2 seconds
     printf("Philosopher % d eats for %d seconds\n", philosopherIndex, eatTime);
     sleep(eatTime); // sleep for random time, philosopher eating
+}
+
+void putDownChop(int philosopherIndex)
+{
+    pthread_mutex_unlock(&chopsticks[(philosopherIndex + 1) % NUM_PHILOSOPHERS]); // Unlock mutex for right-hand chopstick
+    printf("Philosopher &d put down his right-hand chopstick", philosopherIndex);
+    pthread_mutex_unlock(&chopsticks[(philosopherIndex + NUM_PHILOSOPHERS) % NUM_PHILOSOPHERS]); // Unlock mutex for left-hand chopstick
+     printf("Philosopher &d put down his left-hand chopstick", philosopherIndex);
 }
 
 
