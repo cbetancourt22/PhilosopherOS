@@ -30,6 +30,8 @@ void putDownChop(int);
 */
 void eat(int);
 
+void *philosopher( void*);
+
 pthread_mutex_t chopsticks[NUM_PHILOSOPHERS];
 pthread_t philosophers[NUM_PHILOSOPHERS];
 pthread_attr_t attribute[NUM_PHILOSOPHERS];
@@ -62,7 +64,18 @@ void pickUpChop(int philosopherIndex)
     // Example, philosopher[0] has left chopstick 0 and right chopstick 1
     int rightChop = (philosopherIndex + 1) % NUM_PHILOSOPHERS; 
     int leftChop = (philosopherIndex + NUM_PHILOSOPHERS) % NUM_PHILOSOPHERS;
+    /*
+        If philosopher odd
+        printf("Philosopher %d is waiting to pick up left chopsticks %d\n", philosopherNumber, left);
+		pthread_mutex_lock(&chopsticks[left]);
+		printf("Philosopher %d picked up left chopstick %d\n", philosopherNumber, left);
+		printf("Philosopher %d is waiting to pick up right chopstick %d\n", philosopherNumber, right);
+		pthread_mutex_lock(&chopsticks[right]);
+		printf("Philosopher %d picked up right chopstick %d\n", philosopherNumber, right);
 
+        else philosopher even
+        (reverse the logic)
+    */
 
 }
 
@@ -79,6 +92,17 @@ void putDownChop(int philosopherIndex)
     printf("Philosopher &d put down his right-hand chopstick", philosopherIndex);
     pthread_mutex_unlock(&chopsticks[(philosopherIndex + NUM_PHILOSOPHERS) % NUM_PHILOSOPHERS]); // Unlock mutex for left-hand chopstick
      printf("Philosopher &d put down his left-hand chopstick", philosopherIndex);
+}
+
+void *philosopher( void *philosopherIndex)
+{
+    while(1)
+    {
+        think(philosopherIndex);
+        pickUpChop(philosopherIndex);
+        eat(philosopherIndex);
+        putDownChop(philosopherIndex);
+    }
 }
 
 
