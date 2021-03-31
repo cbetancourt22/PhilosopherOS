@@ -22,7 +22,7 @@ pthread_attr_t attribute[NUM_PHILOSOPHERS];
 
 int main(void)
 {
-    printf("HOla bishesh");
+    printf("HOla bisheshh");
     
     return 0;
 }
