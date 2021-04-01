@@ -1,5 +1,5 @@
 // CS475W lab05 Mutual Exclusion
-// Simulation of process for 'x' amount of time
+// Simulation of process for the classic Dinning Philosopher problem for 'x' amount of time
 // Due time: 4/1/2021 Thursday
 // Student name: Bishesh Tuladhar, Xavier Betancourt
 
@@ -17,6 +17,12 @@
 */
 void think(int);
 
+/*
+    Each philosopher, based on the index (odd or even), will proceed to pick up chopstics.
+    First, odd index philosophers get to pick up their left and then right chopstick. When they are
+    done, even index philosphers get to pick their right and then left chopsticks. This way, we can also
+    prevent a deadlock when proceeding sequentially.
+*/
 void pickUpChop(int);
 
 /*
@@ -30,6 +36,9 @@ void putDownChop(int);
 */
 void eat(int);
 
+/*
+
+*/
 void *philosopher( void*);
 
 pthread_mutex_t chopsticks[NUM_PHILOSOPHERS];
@@ -38,13 +47,7 @@ pthread_attr_t attribute[NUM_PHILOSOPHERS];
 
 int main(void)
 {
-    int num = 1%5;
-    int num2 = 2%5;
-    int num3 = 3%5;
-    int num4 = 4%5;
-    int num5 = 5%5;
-
-    printf("Result %d", num5);
+    // Initialize everything here
     
     return 0;
 }
